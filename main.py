@@ -38,6 +38,9 @@ def main():
 
     msg.pack()
 
+    # todo put the text into a text widget: https://www.geeksforgeeks.org/python-tkinter-text-widget/
+    # todo: fix size of text
+
     def move_quote():
         index = int(spinbox1.get())
         str_quote = quotes[index - 1]
@@ -64,6 +67,7 @@ def main():
 
 
 main()
+
 # %%
 
 # %%
