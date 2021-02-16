@@ -10,6 +10,7 @@ import csv
 
 
 def main():
+    """the main function that contains the tkinter window loop"""
     # initialize window manager
     main_window = Tk()
     # rename the title of your window
@@ -19,6 +20,7 @@ def main():
     # change window size > set to new geometry "widthxheight+x+y
     main_window.geometry("500x350+800+300")  # dimension and positioning on screen
 
+    # extracting the quotes from the csv file:
     quotes = []
     with open("quotes.csv", "r") as fin:
         myreader = csv.reader(fin, delimiter=";")
@@ -33,6 +35,7 @@ def main():
                   wrap=WORD, relief=GROOVE)
     txtbox.pack()
 
+    # putting text into the textbox:
     txtbox.insert(END, str_quote)
 
     def move_quote():
@@ -45,7 +48,7 @@ def main():
         except IndexError:
             pass
 
-
+    # this widget lets us pick a quote by clicking the arrows with the mouse
     spinbox1 = Spinbox(main_window, from_=1, to=number_of_quotes, command=move_quote, bg='gray', fg='blue',
                        font=('verdana', 20), width=3)
 
@@ -56,7 +59,7 @@ def main():
         main_window.destroy()  # you could just exit without destroying window first
         exit()
 
-    # button for exit
+    # exit button
     button1 = Button(main_window, text="Exit", width=5, command=close_window)
     button1.pack()
 

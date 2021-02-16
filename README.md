@@ -1,3 +1,3 @@
 # Quotes
 
-The program shows random quotes in a simple window.
+The program shows quotes in a simple window read from a csv file.
