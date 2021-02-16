@@ -2,14 +2,9 @@
 # author: Steve-P42
 # creation date: 2021-02-15 08:29:45
 # purpose: Display a random quote in a simple window
-# status:
+# status: in progress
 # %%
 
-# %%
-
-# %%
-
-# %%
 from tkinter import *
 import csv
 
@@ -31,37 +26,39 @@ def main():
             quotes.append(row[0])
 
     index = 0
+    number_of_quotes = len(quotes)
     str_quote = quotes[index]
-    msg = Message(main_window, text=str_quote,
-                  padx=25, pady=20, bd=5, relief=GROOVE)
-    msg.config(bg='gray', fg='blue', font=('verdana', 25))
 
-    msg.pack()
+    txtbox = Text(main_window, height=7, width=25, bg='blue', fg='black', font=('verdana', 20),
+                  wrap=WORD, relief=GROOVE)
+    txtbox.pack()
 
-    # todo put the text into a text widget: https://www.geeksforgeeks.org/python-tkinter-text-widget/
-    # todo: fix size of text
+    txtbox.insert(END, str_quote)
 
     def move_quote():
-        index = int(spinbox1.get())
-        str_quote = quotes[index - 1]
-        msg.config(text=str_quote)
+        """change the quotes displayed"""
+        try:
+            index = int(spinbox1.get())
+            str_quote = quotes[index - 1]
+            txtbox.delete('1.0', END)
+            txtbox.insert(END, str_quote)
+        except IndexError:
+            pass
 
-    spinbox1 = Spinbox(main_window, from_=1, to=5, command=move_quote, bg='gray', fg='blue', font=('verdana', 20),
-                       width=5)
 
-    spinbox1.pack(side=LEFT)
+    spinbox1 = Spinbox(main_window, from_=1, to=number_of_quotes, command=move_quote, bg='gray', fg='blue',
+                       font=('verdana', 20), width=3)
 
-    # exit function
+    spinbox1.pack()
+
     def close_window():
+        """exit function"""
         main_window.destroy()  # you could just exit without destroying window first
         exit()
 
-    # exit button
-    # label1 = Label(main_window, text="click to exit program", bg="black", fg="green", font="none 12 bold")
-    # label1.pack(side=BOTTOM)
     # button for exit
     button1 = Button(main_window, text="Exit", width=5, command=close_window)
-    button1.pack(side=RIGHT)
+    button1.pack()
 
     mainloop()
 
@@ -69,6 +66,7 @@ def main():
 main()
 
 # %%
-
 # %%
-
+# %%
+# %%
+# %%
