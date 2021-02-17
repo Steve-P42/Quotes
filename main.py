@@ -4,9 +4,10 @@
 # purpose: Display a random stoic quote in a simple window
 # status: in progress
 # %%
-
 from tkinter import *
 from tkinter.ttk import *
+import re
+from random import randint
 
 
 def main():
@@ -23,9 +24,6 @@ def main():
     main_window.resizable(height=0, width=0)
 
     # extracting quotes from a txt file:
-    import re
-    from random import randint
-
     stoic_quotes_content = open("stoic_quotes.txt", "r", encoding='utf8')
     stoic_quotes_content_txt = stoic_quotes_content.read()
 
@@ -37,16 +35,8 @@ def main():
     index = randint(1, len(distinct_quotes) - 1)
 
     picked_quote = distinct_quotes[index]
-    # longest quote:
-    # picked_quote = 'There are times when even to live is an act of bravery. So there is the comforting thing about\
-    # extremities of pain: if you feel it too much you are bound to stop feeling it. The love of power or money or\
-    # luxurious living are not the only things which are guided by popular thinking. We take our cue from people’s\
-    # thinking even in the way we feel pain. Another thing which will help you is to turn your mind to other thoughts\
-    # and that way get away from your suffering. Call to mind things which you have done that have been upright or\
-    # courageous; run over in your mind the finest parts you have played. ‘But my illness has taken me away from my\
-    # duties and won’t allow me to achieve anything.’ It is your body, not your mind as well, that is in the grip of\
-    # ill health.\nSeneca\nLetter LXXVIII'
 
+    # text widget
     textbox = Text(main_window, height=14, width=55, bg='blue', fg='black', font=('verdana', 18),
                    wrap=WORD, relief=FLAT)
     textbox.pack()
@@ -56,7 +46,6 @@ def main():
 
     def get_new_quote():
         """change the quotes displayed"""
-
         new_quote = distinct_quotes[randint(1, len(distinct_quotes) - 1)]
         textbox.delete('1.0', END)
         textbox.insert(END, new_quote)
@@ -64,23 +53,12 @@ def main():
     # Create style Object
     style = Style()
 
-    # Will add style to every available button
-    # even though we are not passing style
-    # to every button widget.
-    style.configure('TButton', font=('calibri', 10, 'bold', 'underline'), foreground='blue')
+    # Add style to every available button
+    style.configure('TButton', font=('verdana', 10, 'bold', 'underline'), foreground='blue')
 
     # random button
     button1 = Button(main_window, text="Random Quote", width=20, command=get_new_quote)
     button1.pack()
-    #
-    # def close_window():
-    #     """exit function"""
-    #     main_window.destroy()  # you could just exit without destroying window first
-    #     exit()
-    #
-    # # exit button
-    # button2 = Button(main_window, text="Exit", width=5, command=close_window)
-    # button2.pack(RIGHT)
 
     mainloop()
 
@@ -102,6 +80,16 @@ main()
 #     arr.append([len(i), i])
 #
 # print(max(arr))
+
+# longest quote:
+# picked_quote = 'There are times when even to live is an act of bravery. So there is the comforting thing about\
+# extremities of pain: if you feel it too much you are bound to stop feeling it. The love of power or money or\
+# luxurious living are not the only things which are guided by popular thinking. We take our cue from people’s\
+# thinking even in the way we feel pain. Another thing which will help you is to turn your mind to other thoughts\
+# and that way get away from your suffering. Call to mind things which you have done that have been upright or\
+# courageous; run over in your mind the finest parts you have played. ‘But my illness has taken me away from my\
+# duties and won’t allow me to achieve anything.’ It is your body, not your mind as well, that is in the grip of\
+# ill health.\nSeneca\nLetter LXXVIII'
 
 # %%
 # %% csv version with spinbox:
